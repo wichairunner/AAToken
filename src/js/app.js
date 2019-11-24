@@ -73,40 +73,6 @@ App = {
     });
   },
 
-  getTokenInfo: function() {
-    console.log('Getting balances...');
-
-    var tutorialTokenInstance;
-    var tokenName;
-    var tokenDecimals;
-    var tokenSymbol;
-
-
-    web3.eth.getAccounts(function(error, accounts) {
-      if (error) {
-        console.log(error);
-      }
-
-      var account = accounts[0];
-
-      App.contracts.TutorialToken.deployed().then(function(instance) {
-        tutorialTokenInstance = instance;
-
-        tokenName = tutorialTokenInstance.name();
-        tokenDecimals = tutorialTokenInstance.decimals();
-        tokenSymbol = tutorialTokenInstance.symbol();
-        
-        return tutorialTokenInstance.balanceOf(account);
-      }).then(function(result) {
-        balance = result.c[0];
-
-        $('#TTBalance').text(balance);
-      }).catch(function(err) {
-        console.log(err.message);
-      });
-    });
-  },
-
   getBalances: function() {
     console.log('Getting balances...');
 
